@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  rclone-anime: &default
+    image: anon0511/docker-rclone-move:latest
+    restart: unless-stopped
+    container_name: rclone-anime
+    environment:
+      - to_path=anime:/
+      - from_path=/mnt/google/anime/
+      - TZ=Europe/Berlin
+      - intvl=60
+      - minage=120
+      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line -v
+    volumes:
+      - /mnt/google/anime:/mnt/google/anime
+      - /home/user/.config/rclone:/var/rclone/.config/rclone
+      - /home/rclone:/rclone
+
+  rclone-movies:
+    <<: *default
+    restart: unless-stopped
+    container_name: rclone-movies
+    environment:
+      - to_path=movies:/
+      - from_path=/mnt/google/movies/
+      - TZ=Europe/Berlin
+      - intvl=60
+      - minage=120
+      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line -v
+    volumes:
+      - /mnt/google/movies:/mnt/google/movies
+      - /home/user/.config/rclone:/var/rclone/.config/rclone
+      - /home/rclone:/rclone
+
+  rclone-tv:
+    <<: *default
+    restart: unless-stopped
+    container_name: rclone-tv
+    environment:
+      - to_path=tv:/
+      - from_path=/mnt/google/tv/
+      - TZ=Europe/Berlin
+      - intvl=60
+      - minage=120
+      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line -v
+    volumes:
+      - /mnt/google/tv:/mnt/google/tv
+      - /home/user/.config/rclone:/var/rclone/.config/rclone
+      - /home/rclone:/rclone
+
