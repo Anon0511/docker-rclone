@@ -32,7 +32,7 @@ services:
       - TZ=Europe/Berlin
       - intvl=60
       - minage=120
-      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line -v
+      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line
     volumes:
       - /mnt/google/anime:/mnt/google/anime
       - /home/user/.config/rclone:/var/rclone/.config/rclone
