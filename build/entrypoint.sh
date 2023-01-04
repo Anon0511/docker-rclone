@@ -4,7 +4,7 @@ echo "initing RCLONE program"
 echo "env content of from_path: $from_path"
 echo "env content of to_path: $to_path"
 echo "time zone: $TZ"
-echo "$OPTS"
+echo "OPTS: $OPTS"
 
 if [ -z "$intvl" ]
 then
