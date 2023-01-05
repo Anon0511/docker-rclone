@@ -9,7 +9,7 @@ fi
 
 # Variables
 
-LOGFILE="/rclone/$(echo $to_path | cut -d: -f1).log"
+LOGFILE="/rclone/$(echo $to_path | cut -d: -f1)_$JOB.log"
 
 if [ -z "$minage" ]
 then
