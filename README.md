@@ -21,7 +21,7 @@ This container is built automatically with a pipeline on a weekly schedule using
 version: '3.9'
 services:
   rclone-anime: &default
-    image: anon0511/docker-rclone-move:latest
+    image: anon0511/docker-rclone:latest
     restart: unless-stopped
     container_name: rclone-anime
     environment:
