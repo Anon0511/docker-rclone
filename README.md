@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     container_name: rclone-anime
     environment:
-      - to_path=anime:/
+      - "to_path=anime:"
       - from_path=/mnt/google/anime/
       - TZ=Europe/Berlin
       - intvl=60
