@@ -1,4 +1,4 @@
-# docker-rclone-move
+# docker-rclone
 [Docker Hub!](https://hub.docker.com/r/anon0511/docker-rclone-move)
 
 The container has a hardcoded filter for `.!qB`. This is a flag you can configure in qBittorrent to be added to unfinished Torrents, so these won't be uploaded. You can either ignore it if you aren't using qBit or you might want to start using it.
