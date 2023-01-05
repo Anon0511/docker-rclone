@@ -18,7 +18,7 @@ then
   echo "setting minage : $intvl"
 fi
 
-if ! grep -Fxq $from_path /var/rclone/.config/rclone/rclone.conf
+if ! rclone listremotes | grep -Fq $from_path
 then
   if find $from_path -type f -mmin +$minage ! -name '*.!qB' | read
   then
