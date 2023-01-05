@@ -10,6 +10,7 @@ fi
 # Variables
 
 LOGFILE="/rclone/$(echo $to_path | cut -d: -f1)_$JOB.log"
+UPJOB=$(echo $JOB | tr '[:lower:]' '[:upper:]')
 
 if [ -z "$minage" ]
 then
@@ -17,16 +18,22 @@ then
   echo "setting minage : $intvl"
 fi
 
-# Check for files older than x
-
-if find $from_path* -type f -mmin +$minage ! -name '*.!qB' | read
+if ! grep -Fxq $from_path /var/rclone/.config/rclone/rclone.conf
+then
+  if find $from_path -type f -mmin +$minage ! -name '*.!qB' | read
   then
-  start=$(date +'%s')
-  echo "$(date "+%d.%m.%Y %T") RCLONE UPLOAD STARTED" | tee -a $LOGFILE
-  /usr/bin/rclone $JOB "$from_path" "$to_path" --filter='- *.!qB' --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
-  echo "$(date "+%d.%m.%Y %T") RCLONE UPLOAD FINISHED IN $(($(date +'%s') - $start)) SECONDS" | tee -a $LOGFILE
+    start=$(date +'%s')
+    echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB STARTED" | tee -a $LOGFILE
+    /usr/bin/rclone $JOB "$from_path" "$to_path" --filter='- *.!qB' --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
+    echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB FINISHED IN $(($(date +'%s') - $start)) SECONDS" | tee -a $LOGFILE
+  else
+    echo "Nothing to $JOB"
+  fi
 else
-  echo "Nothing to upload"
+  start=$(date +'%s')
+  echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB STARTED" | tee -a $LOGFILE
+  /usr/bin/rclone $JOB "$from_path" "$to_path" --filter='- *.!qB' --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
+  echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB FINISHED IN $(($(date +'%s') - $start)) SECONDS" | tee -a $LOGFILE
 fi
 
 exit
