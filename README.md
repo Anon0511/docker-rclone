@@ -1,10 +1,6 @@
 # docker-rclone
 [Docker Hub!](https://hub.docker.com/r/anon0511/docker-rclone)
 
-The container has a hardcoded filter for `.!qB`. This is a flag you can configure in qBittorrent to be added to unfinished Torrents, so these won't be uploaded. You can either ignore it if you aren't using qBit or you might want to start using it.
-
-If there is need to actually allow custom filters I might think about it or you open a PR.
-
 
 ### Pipeline
 
@@ -31,7 +27,7 @@ services:
       - intvl=60
       - minage=120
       - JOB=move
-      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line
+      - OPTS=--delete-empty-src-dirs --fast-list --dropbox-chunk-size 128M --tpslimit 12 --tpslimit-burst 12 --transfers 6 --stats-one-line --filter='- *.!qB' 
     volumes:
       - /mnt/google/anime:/mnt/google/anime
       - /home/user/.config/rclone:/var/rclone/.config/rclone
