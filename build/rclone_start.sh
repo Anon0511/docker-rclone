@@ -24,7 +24,7 @@ then
   then
     start=$(date +'%s')
     echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB STARTED" | tee -a $LOGFILE
-    /usr/bin/rclone $JOB "$from_path" "$to_path" --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
+    eval /usr/bin/rclone $JOB "$from_path" "$to_path" --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
     echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB FINISHED IN $(($(date +'%s') - $start)) SECONDS" | tee -a $LOGFILE
   else
     echo "Nothing to $JOB"
@@ -32,7 +32,7 @@ then
 else
   start=$(date +'%s')
   echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB STARTED" | tee -a $LOGFILE
-  /usr/bin/rclone $JOB "$from_path" "$to_path" --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
+  eval /usr/bin/rclone $JOB "$from_path" "$to_path" --min-age ${minage}m --log-level=INFO --log-file=$LOGFILE $OPTS
   echo "$(date "+%d.%m.%Y %T") RCLONE $UPJOB FINISHED IN $(($(date +'%s') - $start)) SECONDS" | tee -a $LOGFILE
 fi
 
