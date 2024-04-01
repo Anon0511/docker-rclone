@@ -4,7 +4,7 @@
 
 ### Pipeline
 
-This container is built automatically with a pipeline on a weekly schedule using alpine:latest and newest official Release of rclone!
+This container is built automatically with a pipeline on a weekly schedule using alpine:latest and a custom Release of rclone!
 
 
 ## Usage
